@@ -1,0 +1,10 @@
+:root {
+  --game-width: 450px;
+  --game-height: 450px;
+
+  --cell-size: 150px;
+
+  --bebas-font: 'Bebas Neue', cursive;
+
+  /* font-family: 'Bebas Neue', cursive; */
+}

@@ -1,0 +1,33 @@
+.btn {
+  position: relative;
+  width: 200px;
+  height: 50px;
+
+  background-color: #c31432;
+  color: white;
+
+  transition: all 0.5s ease-in-out;
+
+  border: none;
+  border-radius: 5px;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn span {
+  display: inline-block;
+  font-family: var(--bebas-font);
+  font-size: 30px;
+  line-height: 50px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+
+  transition: all 0.25s ease-in-out;
+}
+
+.btn:hover span {
+  transform: scale(0.9);
+}
