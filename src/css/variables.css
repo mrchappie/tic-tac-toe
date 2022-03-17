@@ -8,3 +8,30 @@
 
   /* font-family: 'Bebas Neue', cursive; */
 }
+
+@media (max-width: 300px) {
+  :root {
+    --game-width: 300px;
+    --game-height: 300px;
+
+    --cell-size: calc(var(--game-height) / 3);
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    --game-width: 350px;
+    --game-height: 350px;
+
+    --cell-size: calc(var(--game-height) / 3);
+  }
+}
+
+@media (max-width: 500px) {
+  :root {
+    --game-width: 400px;
+    --game-height: 400px;
+
+    --cell-size: calc(var(--game-height) / 3);
+  }
+}

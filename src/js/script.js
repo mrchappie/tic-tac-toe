@@ -3,6 +3,9 @@ const message = document.querySelector('.message');
 const win = document.querySelector('.win-lose-message');
 const btn = document.querySelector('.btn');
 
+const player1 = document.getElementById('player1');
+const player2 = document.getElementById('player2');
+
 let choice = true;
 let winningCombinations = [
   [0, 1, 2],
@@ -46,7 +49,7 @@ const hoverCell = function () {
 };
 
 const startGame = function () {
-  cells.forEach((cell, id) => {
+  cells.forEach(cell => {
     cell.innerHTML = '';
     cell.classList.remove('x');
     cell.classList.remove('o');
@@ -62,33 +65,37 @@ const handleClick = function (e) {
   if (choice) {
     cell.classList.add('x');
     cell.classList.remove('showX');
-    cell.innerHTML = `<i class="fa-solid fa-x"></i>`;
+    cell.innerHTML = `<i class="fa-solid fa-user-astronaut"></i>`;
+    // cell.innerHTML = `<i class="fa-solid fa-x"></i>`;
     currentClass = 'x';
     if (checkWinn(currentClass)) {
       win.textContent = `${currentClass}'s WON! `;
       message.style.display = 'flex';
+      player1.textContent++;
     } else if (checkDraw()) {
       win.textContent = `DRAW `;
       message.style.display = 'flex';
     }
     switchTurn();
-    pickedCells.push(id);
-    console.log(pickedCells);
+    // pickedCells.push(id);
+    // console.log(pickedCells);
   } else {
     cell.classList.add('o');
     cell.classList.remove('showO');
-    cell.innerHTML = `<i class="fa-solid fa-o"></i>`;
+    cell.innerHTML = `<i class="fa-solid fa-user"></i>`;
+    // cell.innerHTML = `<i class="fa-solid fa-o"></i>`;
     currentClass = 'o';
     if (checkWinn(currentClass)) {
       win.textContent = `${currentClass}'s WON! `;
       message.style.display = 'flex';
+      player2.textContent++;
     } else if (checkDraw()) {
       win.textContent = `DRAW `;
       message.style.display = 'flex';
     }
     switchTurn();
-    pickedCells.push(id);
-    console.log(pickedCells);
+    // pickedCells.push(id);
+    // console.log(pickedCells);
   }
 };
 

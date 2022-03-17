@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: center;
 
-  background-color: white;
+  /* background-color: white; */
 }
 
 .cell {
@@ -25,15 +25,20 @@
 
   width: var(--cell-size);
   height: var(--cell-size);
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.3);
 
-  border: 1px solid black;
+  border: 1px solid white;
 
   cursor: pointer;
 }
 
-.cell.showX::after {
-  content: '\58';
+.cell.showX::before {
+  content: '';
+
+  background-image: url(../img/user-astronaut-solid.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 90px;
 
   position: relative;
   display: flex;
@@ -42,12 +47,19 @@
   width: 100%;
   height: 100%;
 
-  font-size: 100px;
-
-  color: rgba(0, 0, 0, 0.2);
+  opacity: 0.2;
 }
-.cell.showO::after {
-  content: '\4f';
+
+.cell.showO::before {
+  content: '';
+
+  background-image: url(../img/user-solid.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 90px;
+
+  width: 90px;
+  height: 90px;
 
   position: relative;
   display: flex;
@@ -56,13 +68,11 @@
   width: 100%;
   height: 100%;
 
-  font-size: 100px;
-
-  color: rgba(0, 0, 0, 0.2);
+  opacity: 0.2;
 }
 
-.cell.x .fa-x,
-.cell.o .fa-o {
+.cell.x .fa-solid,
+.cell.o .fa-solid {
   position: relative;
   display: flex;
   align-items: center;

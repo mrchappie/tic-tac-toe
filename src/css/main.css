@@ -2,6 +2,7 @@
 @import 'variables.css';
 @import 'btn.css';
 @import 'message.css';
+@import 'score.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
@@ -15,7 +16,14 @@ body {
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: black;
+
+  /* background-color: black; */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+    url(../img/mars.jpeg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
   overflow: hidden;
 }
 
