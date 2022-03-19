@@ -1,104 +1,87 @@
 const cells = document.querySelectorAll('.cell');
 const message = document.querySelector('.message');
 const win = document.querySelector('.win-lose-message');
-const btn = document.querySelector('.btn');
+const btnRestart = document.getElementById('restart');
+const btnReset = document.getElementById('reset');
 
 const player1 = document.getElementById('player1');
 const player2 = document.getElementById('player2');
+
+const ASTRONAUT_CLS = 'astronaut';
+const ALIEN_CLS = 'alien';
 
 let choice = true;
 let winningCombinations = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
-  [0, 2, 6],
+  [0, 3, 6],
   [1, 4, 7],
   [2, 5, 8],
   [0, 4, 8],
   [2, 4, 6],
 ];
 
-let pickedCells = [];
+let currentClass = ASTRONAUT_CLS;
 
-let currentClass;
+// HOVER EVENT LISTENER TO DISPLAY CHOICE IN THE HOVERED CELL
 const hoverCell = function () {
   cells.forEach(cell => {
     cell.addEventListener('mouseenter', function () {
-      if (choice && cell.innerHTML === '') {
-        cell.classList.add('showX');
-      }
+      showChoice(cell);
     });
     cell.addEventListener('mouseleave', function () {
-      if (choice && cell.innerHTML === '') {
-        cell.classList.remove('showX');
-      }
-    });
-  });
-  cells.forEach(cell => {
-    cell.addEventListener('mouseenter', function () {
-      if (!choice && cell.innerHTML === '') {
-        cell.classList.add('showO');
-      }
-    });
-    cell.addEventListener('mouseleave', function () {
-      if (!choice && cell.innerHTML === '') {
-        cell.classList.remove('showO');
-      }
+      removeChoice(cell);
     });
   });
 };
 
+// START GAME
 const startGame = function () {
   cells.forEach(cell => {
     cell.innerHTML = '';
-    cell.classList.remove('x');
-    cell.classList.remove('o');
+    cell.classList.remove(ASTRONAUT_CLS);
+    cell.classList.remove(ALIEN_CLS);
 
     cell.removeEventListener('click', handleClick);
     cell.addEventListener('click', handleClick, { once: true });
   });
 };
 
+// INSERT CHOICE
 const handleClick = function (e) {
   let cell = e.target;
 
   if (choice) {
-    cell.classList.add('x');
+    cell.classList.add(ASTRONAUT_CLS);
     cell.classList.remove('showX');
-    cell.innerHTML = `<i class="fa-solid fa-user-astronaut"></i>`;
+    cell.innerHTML = `<div class="img-p1"></div>`;
+    // cell.innerHTML = `<i class="fa-solid fa-user-astronaut"></i>`;
     // cell.innerHTML = `<i class="fa-solid fa-x"></i>`;
-    currentClass = 'x';
+    currentClass = ASTRONAUT_CLS;
     if (checkWinn(currentClass)) {
-      win.textContent = `${currentClass}'s WON! `;
-      message.style.display = 'flex';
-      player1.textContent++;
+      endGame(true);
     } else if (checkDraw()) {
-      win.textContent = `DRAW `;
-      message.style.display = 'flex';
+      endGame(false);
     }
     switchTurn();
-    // pickedCells.push(id);
-    // console.log(pickedCells);
   } else {
-    cell.classList.add('o');
+    cell.classList.add(ALIEN_CLS);
     cell.classList.remove('showO');
-    cell.innerHTML = `<i class="fa-solid fa-user"></i>`;
+    cell.innerHTML = `<div class="img-p2"></div>`;
+    // cell.innerHTML = `<i class="fa-solid fa-user"></i>`;
     // cell.innerHTML = `<i class="fa-solid fa-o"></i>`;
-    currentClass = 'o';
+    currentClass = ALIEN_CLS;
     if (checkWinn(currentClass)) {
-      win.textContent = `${currentClass}'s WON! `;
-      message.style.display = 'flex';
-      player2.textContent++;
+      endGame(true);
     } else if (checkDraw()) {
-      win.textContent = `DRAW `;
-      message.style.display = 'flex';
+      endGame(false);
     }
     switchTurn();
-    // pickedCells.push(id);
-    // console.log(pickedCells);
   }
 };
 
+// CHECK FOR WINN
 const checkWinn = function (currentClass) {
   //   console.log(currentClass);
 
@@ -108,28 +91,70 @@ const checkWinn = function (currentClass) {
     });
   });
 };
+
+// CHECK FOR DRAW
 const checkDraw = function () {
   return [...cells].every(cell => {
-    return cell.classList.contains('x') || cell.classList.contains('o');
+    return (
+      cell.classList.contains(ASTRONAUT_CLS) ||
+      cell.classList.contains(ALIEN_CLS)
+    );
   });
 };
 
+// SHOW DISPLAYED CHOICE
 const showChoice = function (cell) {
-  if (cell.innerHTML === '' && choice) console.log('X');
-  else if (cell.innerHTML === '' && !choice) console.log('O');
+  if (cell.innerHTML === '' && choice) {
+    cell.classList.add('showX');
+  } else if (cell.innerHTML === '' && !choice) {
+    cell.classList.add('showO');
+  }
 };
 
+//  REMOVE DISPLAYED CHOICE
+const removeChoice = function (cell) {
+  if (cell.innerHTML === '' && choice) {
+    cell.classList.remove('showX');
+  } else if (cell.innerHTML === '' && !choice) {
+    cell.classList.remove('showO');
+  }
+};
+
+// SWITCH PLAYER TURN
 const switchTurn = function () {
   choice = !choice;
 };
 
-btn.addEventListener('click', function () {
-  pickedCells = [];
-  currentClass = 'x';
+// END GAME
+const endGame = function (event) {
+  if (event) {
+    win.textContent = `${currentClass} WON! `;
+    message.style.display = 'flex';
+    currentClass === ASTRONAUT_CLS
+      ? player1.textContent++
+      : player2.textContent++;
+  } else {
+    win.textContent = `DRAW!`;
+    message.style.display = 'flex';
+  }
+};
+
+// PLAY AGAIN
+btnRestart.addEventListener('click', function () {
+  currentClass = ASTRONAUT_CLS;
   message.style.display = 'none';
   startGame();
 });
 
+// RESET GAME
+btnReset.addEventListener('click', function () {
+  currentClass = ASTRONAUT_CLS;
+  player1.textContent = 0;
+  player2.textContent = 0;
+  startGame();
+});
+
+// INITIALIZATION FUNCTION
 const init = function () {
   hoverCell();
   startGame();

@@ -25,9 +25,9 @@
 
   width: var(--cell-size);
   height: var(--cell-size);
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
 
-  border: 1px solid white;
+  border: 1px solid black;
 
   cursor: pointer;
 }
@@ -35,7 +35,7 @@
 .cell.showX::before {
   content: '';
 
-  background-image: url(../img/user-astronaut-solid.svg);
+  background-image: url(../img/astronaut.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 90px;
@@ -53,7 +53,7 @@
 .cell.showO::before {
   content: '';
 
-  background-image: url(../img/user-solid.svg);
+  background-image: url(../img/alien.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 90px;
@@ -71,8 +71,8 @@
   opacity: 0.2;
 }
 
-.cell.x .fa-solid,
-.cell.o .fa-solid {
+.cell.astronaut .fa-solid,
+.cell.alien .fa-solid {
   position: relative;
   display: flex;
   align-items: center;
@@ -85,4 +85,26 @@
   color: black;
 
   cursor: not-allowed;
+}
+
+.cell .img-p1 {
+  position: relative;
+  width: 90px;
+  height: 90px;
+
+  background-image: url(../img/astronaut.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cell .img-p2 {
+  position: relative;
+  width: 90px;
+  height: 90px;
+
+  background-image: url(../img/alien.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

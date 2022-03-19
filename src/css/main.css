@@ -18,8 +18,8 @@ body {
   align-items: center;
 
   /* background-color: black; */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-    url(../img/mars.jpeg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(../img/bg.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -35,4 +35,21 @@ h1 {
   padding: 30px;
   text-align: center;
   color: white;
+}
+
+#reset {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 1000px) {
+  body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url(../img/bg_2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
